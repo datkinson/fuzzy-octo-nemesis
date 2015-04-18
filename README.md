@@ -1,7 +1,6 @@
-# Material Design prototype
+# Bastet - Bluetooth friend
 
-
-This is a prototype to get some web based material deisgn off of the ground.
+Prototype of a bluetooth device proximity manager.
 
 ## Install
 
