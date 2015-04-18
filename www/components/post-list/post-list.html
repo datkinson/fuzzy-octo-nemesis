@@ -6,7 +6,7 @@
     <template>
         <link rel="stylesheet" type="text/css" href="post-list.css">
         <post-service id="service" posts="{{posts}}"></post-service>
-        <div layout vertical center>
+        <div hidden?="{{visible}}" layout vertical center>
         <template repeat="{{post in posts}}">
             <post-card favorite="{{post.favorite}}" on-favorite-tap="{{handleFavorite}}" hidden?="{{show == 'favorites' && !post.favorite}}">
                 <img src="{{post.avatar}}" width="70" height="70">
