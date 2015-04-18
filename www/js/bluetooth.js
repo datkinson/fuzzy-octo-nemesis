@@ -75,15 +75,22 @@ function formatDevices() {
     var results = [];
     application.devices.forEach(
         function(item) {
-            var result = {
-                uid: item.address,
-                username: item.name,
-                text: item.advertisement,
-                signal: item.rssi,
-                avatar: "img/types/bluetooth.png"
-            };
+            var result = {};
+            // get existing item properties
+            document.querySelector('post-list').posts.forEach(function(existing){
+                if(existing.uid == item.address) { result = existing; }
+            });
+
+            // update the result with the new data
+            result.uid = item.address;
+            result.username = item.name;
+            result.text = item.advertisement;
+            result.signal = item.rssi;
+            result.avatar = "img/types/bluetooth.png";
+
             // change this from MI to uri-beacon when you have a physical-web beacon
             if(item.name === 'MI') { result.avatar = "img/types/uri-beacon.png"; }
+
             results.push(result);
         }
     );

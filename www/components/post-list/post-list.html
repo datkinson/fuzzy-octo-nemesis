@@ -11,7 +11,8 @@
             <post-card favorite="{{post.favorite}}" on-favorite-tap="{{handleFavorite}}" hidden?="{{show == 'favorites' && !post.favorite}}">
                 <img src="{{post.avatar}}" width="70" height="70">
                 <h2>{{post.username}}</h2>
-                <p>{{post.text}}</p>
+                <p>Signal: {{post.signal}}</p>
+                <p>MAC: {{post.uid}}</p>
             </post-card>
             </template>
         </div>
