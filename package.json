@@ -9,7 +9,7 @@
     "install:plugins": "cordova plugin add https://github.com/randdusing/BluetoothLE",
     "add:android": "cordova platform add android && npm run install:plugins",
     "add:wp8.1": "cordova platform add wp8.1 && npm run install:plugins",
-    "build:android": "cordova build android"
+    "build:android": "cordova build android && cp -v platforms/android/ant-build/MainActivity-debug.apk Bastet-BTF.apk"
   },
   "author": "Daniel Atkinson (hourd.tasa@gmail.com)",
   "license": "MIT",
