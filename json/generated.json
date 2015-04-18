@@ -1,0 +1,42 @@
+[
+  {
+    "uid": "5532271c21b78c8c2335bca4",
+    "avatar": "img/types/uri-beacon.png",
+    "username": "Terrell",
+    "text": "cupidatat ea do non consequat",
+    "greeting": "Hello, undefined! You have 9 unread messages.",
+    "favourite": false
+  },
+  {
+    "uid": "5532271c7ff1ce40e3547ca5",
+    "avatar": "img/types/bluetooth.png",
+    "username": "Smith",
+    "text": "laboris aute exercitation laboris adipisicing",
+    "greeting": "Hello, undefined! You have 4 unread messages.",
+    "favourite": false
+  },
+  {
+    "uid": "5532271c3387c89fefcbc48e",
+    "avatar": "img/types/uri-beacon.png",
+    "username": "Hull",
+    "text": "labore esse mollit velit occaecat",
+    "greeting": "Hello, undefined! You have 3 unread messages.",
+    "favourite": false
+  },
+  {
+    "uid": "5532271cd24f96ea4dcddad9",
+    "avatar": "img/types/uri-beacon.png",
+    "username": "Marissa",
+    "text": "non labore ipsum commodo excepteur",
+    "greeting": "Hello, undefined! You have 4 unread messages.",
+    "favourite": false
+  },
+  {
+    "uid": "5532271cec0127bf62a0e8dd",
+    "avatar": "img/types/bluetooth.png",
+    "username": "Frost",
+    "text": "nulla do id irure qui",
+    "greeting": "Hello, undefined! You have 6 unread messages.",
+    "favourite": false
+  }
+]
