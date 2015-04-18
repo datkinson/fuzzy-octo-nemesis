@@ -7,6 +7,7 @@
     <author email="hourd.tasa@gmail.com" href="https://nopro.be">
         Daniel Atkinson
     </author>
+    <icon src="res/icon.png" />
     <content src="index.html" />
     <access origin="*" />
 </widget>
