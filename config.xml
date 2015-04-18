@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="be.nopro.bastet" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Bastet</name>
+    <description>
+        Material design prototype
+    </description>
+    <author email="hourd.tasa@gmail.com" href="https://nopro.be">
+        Daniel Atkinson
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+</widget>
