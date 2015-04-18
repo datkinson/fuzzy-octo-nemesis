@@ -1,0 +1,11 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="dynamic-content" attributes="show">
+    <template>
+        <link rel="stylesheet" type="text/css" href="dynamic-content.css">
+        <div hidden?="{{visible}}" layout vertical center>
+            <h2>No Content</h2>
+        </div>
+    </template>
+    <script src="dynamic-content.js"></script>
+</polymer-element>
