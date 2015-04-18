@@ -22,3 +22,12 @@ polyfill-next-selector { content: '.card-header img'; }
     border-radius: 50%;
     margin: 10px;
 }
+core-icon-button {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    color: #636363;
+}
+:host([favorite]) core-icon-button {
+    color: #da4336;
+}
