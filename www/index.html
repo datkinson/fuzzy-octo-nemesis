@@ -15,6 +15,7 @@
         <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
         <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
         <link rel="import" href="components/post-list/post-list.html">
+        <link rel="import" href="components/dynamic-content/dynamic-content.html">
 
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
@@ -24,10 +25,12 @@
                 <paper-tabs id="tabs" selected="all" self-end>
                     <paper-tab name="all">All</paper-tab>
                     <paper-tab name="favorites">Registered</paper-tab>
+                    <paper-tab name="content">Content</paper-tab>
                 </paper-tabs>
             </core-toolbar>
             <div class="container" layout vertical center>
                 <post-list show="all"></post-list>
+                <dynamic-content show="all"></dynamic-content>
             </div>
         </core-header-panel>
         <script type="text/javascript" src="cordova.js"></script>

@@ -1,8 +1,18 @@
 var tabs = document.querySelector('paper-tabs');
 var list = document.querySelector('post-list');
+var content = document.querySelector('dynamic-content');
 
-tabs.addEventListener('core-select', function() {
-    list.show = tabs.selected;
+tabs.addEventListener('core-select', function(eventObject) {
+    if(eventObject.detail.isSelected) {
+        if(tabs.selected === 'content') {
+            list.hidden = true;
+            content.hidden = false;
+        } else {
+            content.hidden = true;
+            list.hidden = false;
+            list.show = tabs.selected;
+        }
+    }
 });
 
 function updateList(list) {
