@@ -5,10 +5,6 @@ var application = {
     error: '',
     success: ''
 };
-//application.params = {"request": true, "statusReciever": false};
-//application.devices = [];
-//application.content = [];
-
 
 application.content.push({'address': 'EA:FC:5B:28:2C:76', 'uri': 'example.com', 'text': 'Device 1'});
 application.content.push({'address': '28:B2:BD:86:BA:B8', 'uri': 'test.example.com', 'text': 'Location 1'});
@@ -94,6 +90,7 @@ function formatDevices() {
             results.push(result);
         }
     );
+    displayContent(getClosest(application.devices));
     return orderBy(results, 'signal');
 }
 
@@ -107,4 +104,20 @@ function orderBy(array, property) {
     }
     array.sort(compare);
     return array;
+}
+
+function displayContent(device) {
+    var defaultContent, match=false;
+    document.querySelector('dynamic-content').contentLibrary.forEach(function(content){
+        if(content.uid === 'default') {
+            defaultContent = content.content;
+        }
+        if(content.uid == device.address) {
+            document.querySelector('dynamic-content').currentContent = content.content;
+            match = true;
+        }
+    });
+    if(!match) {
+        document.querySelector('dynamic-content').currentContent = defaultContent;
+    }
 }
