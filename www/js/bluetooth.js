@@ -32,7 +32,6 @@ function scanSuccess(response) {
         }
         application.devices.push(response);
         updateList(formatDevices());
-        console.log('new device');
     }
 }
 
@@ -106,6 +105,13 @@ function orderBy(array, property) {
     return array;
 }
 
+function contentJSONToHTML(content) {
+    var output = "";
+    if(typeof content.title !== 'undefined') { output+="<h2>"+content.title+"</h2>"; }
+    if(typeof content.description !== 'undefined') { output+="<p>"+content.description+"</p>"; }
+    return output;
+}
+
 function displayContent(device) {
     var defaultContent, match=false;
     document.querySelector('dynamic-content').contentLibrary.forEach(function(content){
@@ -113,11 +119,14 @@ function displayContent(device) {
             defaultContent = content.content;
         }
         if(content.uid == device.address) {
-            document.querySelector('dynamic-content').currentContent = content.content;
+            //document.querySelector('dynamic-content').currentContent = content.content;
+            document.querySelector('dynamic-content').newHtmlContent = contentJSONToHTML(content.content);
             match = true;
         }
     });
     if(!match) {
-        document.querySelector('dynamic-content').currentContent = defaultContent;
+        //document.querySelector('dynamic-content').currentContent = defaultContent;
+        document.querySelector('dynamic-content').newHtmlContent = contentJSONToHTML(defaultContent);
     }
+    document.querySelector('dynamic-content').contentChanged();
 }
