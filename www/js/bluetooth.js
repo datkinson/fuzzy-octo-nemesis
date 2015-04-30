@@ -1,3 +1,5 @@
+/* global bluetoothle */
+/* global updateList */
 var application = {
     params: {"request": true, "statusReciever": false},
     devices: [],
@@ -43,21 +45,35 @@ function initialiseBluetooth() {
 	bluetoothle.initialize(initialiseSuccess, initialiseError, application.params);
 }
 
+function getDevicesWithContent(devices, contents) {
+    var validDevices = [];
+    devices.forEach(function(device) {
+        contents.forEach(function(content) {
+            if(device.address === content.uid) {
+                validDevices.push(device);
+            }
+        });
+    });
+    return validDevices;
+}
+
 function getClosest(devices) {
-	var closest;
-	for (var device in devices) {
-		if(device !== 'undefined') {
-			if(devices.hasOwnProperty(device)) {
-				if(typeof closest !== 'undefined') {
-					if(devices[device].rssi > closest.rssi) {
-						closest = devices[device];
-					}
-				} else {
-					closest = devices[device];
-				}
-			}
-		}
-	}
+    var closest;
+    if(devices.length > 0) {
+    	for (var device in devices) {
+    		if(device !== 'undefined') {
+    			if(devices.hasOwnProperty(device)) {
+    				if(typeof closest !== 'undefined') {
+    					if(devices[device].rssi > closest.rssi) {
+    						closest = devices[device];
+    					}
+    				} else {
+    					closest = devices[device];
+    				}
+    			}
+    		}
+    	}    
+    }
 	return closest;
 }
 
@@ -85,11 +101,18 @@ function formatDevices() {
 
             // change this from MI to uri-beacon when you have a physical-web beacon
             if(item.name === 'MI') { result.avatar = "img/types/uri-beacon.png"; }
+            document.querySelector('dynamic-content').contentLibrary.forEach(function(libraryItem){
+                if(libraryItem.uid === result.uid) {
+                    if(typeof libraryItem.content.title !== 'undefined') { result.username = libraryItem.content.title; }
+                    if(typeof libraryItem.content.thumbnail !== 'undefined') { result.avatar = libraryItem.content.thumbnail; }
+                }
+            });
 
             results.push(result);
         }
     );
-    displayContent(getClosest(application.devices));
+    removeOldReadings();
+    displayContent(getClosest(getDevicesWithContent(application.devices, document.querySelector('dynamic-content').contentLibrary)));
     return orderBy(results, 'signal');
 }
 
@@ -107,26 +130,41 @@ function orderBy(array, property) {
 
 function contentJSONToHTML(content) {
     var output = "";
-    if(typeof content.title !== 'undefined') { output+="<h2>"+content.title+"</h2>"; }
+    if(typeof content.title !== 'undefined') { output+="<h2 style='margin-top: -30px; margin-bottom: 5px;'>"+content.title+"</h2>"; }
+    if(typeof content.heading !== 'undefined') { output+="<h3 style='margin-top: 5px; margin-bottom: 5px;'>"+content.heading+"</h3>"; }
     if(typeof content.description !== 'undefined') { output+="<p>"+content.description+"</p>"; }
+    if(typeof content.image !== 'undefined') { output+='<img src="'+content.image+'" style="width: 60%;">'; }
     return output;
 }
 
 function displayContent(device) {
-    var defaultContent, match=false;
-    document.querySelector('dynamic-content').contentLibrary.forEach(function(content){
-        if(content.uid === 'default') {
-            defaultContent = content.content;
+    if(typeof device !== 'undefined') {
+        var defaultContent, match=false;
+        document.querySelector('dynamic-content').contentLibrary.forEach(function(content){
+            if(content.uid === 'default') {
+                defaultContent = content.content;
+            }
+            if(content.uid == device.address) {
+                //document.querySelector('dynamic-content').currentContent = content.content;
+                document.querySelector('dynamic-content').newHtmlContent = contentJSONToHTML(content.content);
+                match = true;
+            }
+        });
+        if(!match) {
+            //document.querySelector('dynamic-content').currentContent = defaultContent;
+            document.querySelector('dynamic-content').newHtmlContent = contentJSONToHTML(defaultContent);
         }
-        if(content.uid == device.address) {
-            //document.querySelector('dynamic-content').currentContent = content.content;
-            document.querySelector('dynamic-content').newHtmlContent = contentJSONToHTML(content.content);
-            match = true;
-        }
-    });
-    if(!match) {
-        //document.querySelector('dynamic-content').currentContent = defaultContent;
-        document.querySelector('dynamic-content').newHtmlContent = contentJSONToHTML(defaultContent);
+        document.querySelector('dynamic-content').contentChanged();
     }
-    document.querySelector('dynamic-content').contentChanged();
+}
+
+function removeOldReadings(timeout) {
+    // timout in seconds
+    if(typeof timeout === 'undefined') { timeout = 3; }
+    var time = Math.floor(Date.now() / 1000) - timeout;
+    var newDevices = [];
+    application.devices.forEach(function (device) {
+        if(device.time > time) { newDevices.push(device); }
+    });
+    application.devices = newDevices;
 }
