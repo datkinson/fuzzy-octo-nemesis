@@ -14,7 +14,7 @@
   "author": "Daniel Atkinson (hourd.tasa@gmail.com)",
   "license": "MIT",
   "dependencies": {
-    "bower": "^1.4.1",
-    "cordova": "^4.3.0"
+    "bower": "*",
+    "cordova": "*"
   }
 }
